@@ -44,8 +44,9 @@ function App() {
         }}
       >
         {config.flat(1).map((val, index) => (
-         val ? <Cell key={index} filled={order.includes(index)} onClick={()=>setActiveIndex(index)}/> : <span key={index}
-          isDisabled = {order.includes(index) || isNotActive}
+         val ? <Cell key={index} filled={order.includes(index)} onClick={()=>setActiveIndex(index)} 
+           isDisabled={order.includes(index) || isNotActive}
+         /> : <span key={index}
          />
         ))}
       </div>
