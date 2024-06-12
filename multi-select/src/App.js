@@ -34,38 +34,45 @@ function App() {
     setSearchSuggestion([]);
     inputRef.current.focus();
   };
-  
-  const handleRemoveUser = (user) =>{
-    const filterUser = selectedUser.filter((item)=>(
-         item.id !== user.id
-    ))
-    setSelectedUser(filterUser);
-    
-    const updatedEmails = new Set(selectedUserSet);
-    updatedEmails.delete(user.email)
-    setSelectedUserSet(updatedEmails);
-  }
 
-  const handleKeyDown = (e) =>{
-    if(e.key === 'Backspace' && e.target.value === '' && selectedUser.length > 0){
-      const lastuser = selectedUser[selectedUser.length-1];
+  const handleRemoveUser = (user) => {
+    const filterUser = selectedUser.filter((item) => item.id !== user.id);
+    setSelectedUser(filterUser);
+
+    const updatedEmails = new Set(selectedUserSet);
+    updatedEmails.delete(user.email);
+    setSelectedUserSet(updatedEmails);
+  };
+
+  const handleKeyDown = (e) => {
+    if (
+      e.key === "Backspace" &&
+      e.target.value === "" &&
+      selectedUser.length > 0
+    ) {
+      const lastuser = selectedUser[selectedUser.length - 1];
       handleRemoveUser(lastuser);
       setSearchSuggestion([]);
     }
-  }
+  };
 
   return (
     <div className="user-search-container">
       <div className="user-search-input">
-      {selectedUser.map((user)=>{
-        return<Pills key={user.email} image={user.image} text={`${user.firstName} ${user.lastName}`}
-          onClick={()=>handleRemoveUser(user)}
-        />
-      })}
+        {selectedUser.map((user) => {
+          return (
+            <Pills
+              key={user.email}
+              image={user.image}
+              text={`${user.firstName} ${user.lastName}`}
+              onClick={() => handleRemoveUser(user)}
+            />
+          );
+        })}
         {/* input field with search suggestion */}
         <div>
           <input
-           ref={inputRef}
+            ref={inputRef}
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
